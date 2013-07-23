@@ -31,7 +31,7 @@ NameVirtualHost *:80 # if needed
 ```
 
 <br/>
-###edit the environment settings
+###edit environment settings
 ```
 $:cd TYPO3-Neos-1.0-alpha4
 $:vi flow
