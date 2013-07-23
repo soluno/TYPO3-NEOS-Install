@@ -16,7 +16,7 @@ $:/usr/local/bin/php5-53LATEST-CLI create-project --dev --stability alpha typo3/
 ```
 <br/>
 
-###point your domain to /Web
+###point your domain to /Web via domainfactory domain settings
 or Set up a virtual host inside your apache.conf, and then restart apache:
 
 ```
