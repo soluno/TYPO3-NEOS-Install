@@ -1,4 +1,4 @@
-#TYPO3-NEOS-Install
+#TYPO3 Neos Install
 ====
 
 Installing TYPO3 Neos on domainfactory - managed server
