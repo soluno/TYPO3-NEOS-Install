@@ -12,7 +12,7 @@ Installing TYPO3 Neos on domainfactory - managed server
 
 ###get TYPO3 Neos alpha 4
 ```
-$:/usr/local/bin/php5-53LATEST-CLI create-project --dev --stability alpha typo3/neos-base-distribution TYPO3-Neos-1.0-alpha4
+$:/usr/local/bin/php5-53LATEST-CLI composer.phar create-project --dev --stability alpha typo3/neos-base-distribution TYPO3-Neos-1.0-alpha4
 ```
 <br/>
 
