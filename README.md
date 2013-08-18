@@ -39,7 +39,8 @@ $:vi Settings.yaml
 ```
 ```
 //set database host
-db: 'mysql5.<yourdomain.com>
+backendOptions:
+    host: 'mysql5.<yourdomain.com>
 
 //uncomment core: & phpBinaryPathAndFilename
 //and change phpBinaryPathAndFilename to: 
