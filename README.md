@@ -81,6 +81,10 @@ require($rootPath . 'Packages/Framework/TYPO3.Flow/Classes/TYPO3/Flow/Core/Boots
 <br/>
 
 ###PHP Settings
+configure the PHP version of your domain to PHP5-54LATEST-EXTENDED 
+___
+if not set
+
 set "magic_quotes_gpc" to Off in your php.ini <br>
 set "date.timezone" e.g. "Europe/Berlin" <br>
 set "memory_limit" to 256M
