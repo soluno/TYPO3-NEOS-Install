@@ -1,109 +1,98 @@
-#TYPO3 Neos Install
+#TYPO3 NEOS Install
 ====
 
 Installing TYPO3 Neos on domainfactory - managed server
 
 <br/>
 ###get composer
-<pre>$:curl -s https://getcomposer.org/installer | /usr/local/bin/php5-53STABLE-CLI
+<pre>$:curl -s https://getcomposer.org/installer | /usr/local/bin/php5-54LATEST-CLI
 </pre>
-
 <br/>
 
-###get TYPO3 Neos alpha 4
+###get TYPO3 NEOS
 ```
-$:/usr/local/bin/php5-53LATEST-CLI composer.phar create-project --dev --stability alpha typo3/neos-base-distribution TYPO3-Neos-1.0-alpha4
+$:/usr/local/bin/php5-54LATEST-CLI composer.phar create-project typo3/neos-base-distribution TYPO3-Neos
+```
+or update it.
+
+```
+$:/usr/local/bin/php5-54LATEST-CLI composer.phar -d=TYPO3-Neos update
 ```
 <br/>
 
-###point your domain to /Web via domainfactory domain settings
+###point your domain to /TYPO3-Neos/Web via domainfactory domain settings
 or Set up a virtual host inside your apache.conf, and then restart apache
 
 <br/>
 ###edit environment settings
+
 ```
-$:cd TYPO3-Neos-1.0-alpha4
-$:vi flow
+$: cd TYPO3-Neos
+$: vim flow
 ```
+
+change like the following lines:
+
 ```
-change the first line from -> #!/usr/bin/env php
-to -> #!/usr/local/bin/php5-53STABLE-CLI
-    
-:wq!
+- #!/usr/bin/env php
++ #!/usr/local/bin/php5-54LATEST-CLI
 ```
+
+set configuration file:
 
 ```
 $:cd Configuration/
 $:cp Settings.yaml.example Settings.yaml
-$:vi Settings.yaml
 ```
-```
-//set database host
-backendOptions:
-    host: 'mysql5.<yourdomain.com>
-
-//uncomment core: & phpBinaryPathAndFilename
-//and change phpBinaryPathAndFilename to: 
-core:
-    phpBinaryPathAndFilename: '/usr/local/bin/php5-53STABLE-CLI'
-
-:wq!
-```
+and change like the following (use spaces instead of tabs for indentation):
 
 ```
-$:cd Development/
-$:cp Settings.yaml.example Settings.yaml
-$:vi Settings.yaml
-```
-```
-//set dbname, dbuser, dbpassword:
-dbname: '<dbname>'
-user: '<dbuser>'
-password: '<password>'
+TYPO3:
+  Flow:
+    persistence:
+      backendOptions:
+        host: mysql5.<yourdomain.com>
+        driver: pdo_mysql
 
-:wq!
-```
-<br/>
-###run flow
-```
-$:./flow help
+    core:
+      phpBinaryPathAndFilename: /usr/local/bin/php5-54LATEST-CLI
+    resource:
+      publishing:
+        fileSystem:
+          mirrorMode: copy
 ```
 
-###migrate database
-```
-$:./flow doctrine:migrate 
-```
-
-###kickstart site package
-```
-./flow site:kickstart Your.Demopage Your.Demopage    
-```
-
-###import site package 
-```
-$:./flow site:import --package-key My.Demopage 
+###open index.php in /Web folder
+and change it like the following
 
 ```
-
-###list your sites
-```
-$:./flow site:list
-```
-
-###create neos backend user
-```
-$:./flow user:create <username> <password> <firstname> <lastname> 
-```
-
-###add administrator role to backenduser
-```
-$:./flow user:addrole <username> Administrator
+...
+elseif (substr($rootPath, -1) !== '/') {
+   $rootPath .= '/';
+}
+ 
+putenv ("FLOW_REWRITEURLS=1");
+putenv ("FLOW_CONTEXT=Production");
+ 
+require($rootPath . 'Packages/Framework/TYPO3.Flow/Classes/TYPO3/Flow/Core/Bootstrap.php');
+... 
 ```
 
 <br/>
+
+###PHP Settings
+set "magic_quotes_gpc" to Off in your php.ini <br>
+set "date.timezone" e.g. "Europe/Berlin" <br>
+set "memory_limit" to 256M
+____
+
+<br/><br/>
+
 ###thats it!
 ========
-###now visit<br/>
+go to
 
-http://yourdomain.com/ -> frontend<br/>
-http://yourdomain.com/neos -> backend
+```
+http://yourdomain.com/setup 
+```
+and follow the on-screen instructions!
