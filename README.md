@@ -1,5 +1,5 @@
 #TYPO3 NEOS Install
-====
+---
 
 Installing TYPO3 Neos on domainfactory - managed server
 
@@ -90,7 +90,7 @@ set "date.timezone" e.g. "Europe/Berlin" <br>
 set "memory_limit" to 256M
 ____
 
-<br/><br/>
+<br/>
 
 ###thats it!
 ========
